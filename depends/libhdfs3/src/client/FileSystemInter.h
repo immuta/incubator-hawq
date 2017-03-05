@@ -24,6 +24,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 #include "BlockLocation.h"
 #include "DirectoryIterator.h"
@@ -521,6 +522,14 @@ public:
      * @return Return a vector of encryption zones information..
      */
     virtual std::vector<EncryptionZoneInfo> listAllEncryptionZoneItems() = 0; 
+    
+    /**
+     * list all the xattributes of a given file
+     *
+     * @param src the path that we are listing the xattributes for
+     * @return a map of string to string representing the xattributes names (namesapce.name) and value
+     */
+    virtual std::map<std::string, std::string> listXAttrs(const std::string & src) = 0;
 };
 
 }

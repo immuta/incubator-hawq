@@ -863,5 +863,19 @@ std::vector<EncryptionZoneInfo> FileSystemImpl::listAllEncryptionZoneItems() {
     return retval;
 }
 
+/**
+ * list all the xattributes for a path
+ * @param src the path we are listing xattributes for
+ * @return a map of string, string representing the names (namespace.name)
+ *         and values of the xattributes.
+ */
+std::map<std::string, std::string> FileSystemImpl::listXAttrs(const std::string & src) {
+    if (!nn) {
+        THROW(HdfsIOException, "FileSystemImpl: not connected.");
+    }
+
+    return nn->listXAttrs(src);
+}
+
 }
 }

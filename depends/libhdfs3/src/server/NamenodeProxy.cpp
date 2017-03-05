@@ -548,5 +548,14 @@ bool NamenodeProxy::listEncryptionZones(const int64_t id, std::vector<Encryption
     return false;
 }
 
+std::map<std::string, std::string> NamenodeProxy::listXAttrs(const std::string & src) {
+    NAMENODE_HA_RETRY_BEGIN();
+    return namenode->listXAttrs(src);
+    NAMENODE_HA_RETRY_END();
+    assert(!"should not reach here");
+    std::map<std::string, std::string> empty;
+    return empty;
+}
+
 }
 }

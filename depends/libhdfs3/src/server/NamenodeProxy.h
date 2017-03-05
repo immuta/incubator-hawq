@@ -144,7 +144,8 @@ public:
     EncryptionZoneInfo getEncryptionZoneInfo(const std::string & src, bool *exist);
 
     bool listEncryptionZones(const int64_t id, std::vector<EncryptionZoneInfo> & ezl); 
-
+    
+    std::map<std::string, std::string> listXAttrs(const std::string & src);
 
 private:
     shared_ptr<Namenode> getActiveNamenode(uint32_t & oldValue);

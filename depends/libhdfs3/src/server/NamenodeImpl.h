@@ -225,7 +225,9 @@ public:
     /* throw (FileNotFoundException, UnresolvedLinkException, HdfsIOException) */     
     bool listEncryptionZones(const int64_t id, std::vector<EncryptionZoneInfo> & ezl);
     /* throw (AccessControlException, UnresolvedLinkException, HdfsIOException) */ 
-
+    
+    std::map<std::string, std::string> listXAttrs(const std::string & src);
+    /* throw (AccessControlException, HdfsIOException) */ 
 
 private:
     void invoke(const RpcCall & call);
