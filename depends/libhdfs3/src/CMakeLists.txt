@@ -42,6 +42,9 @@ SET(HEADER
     client/InputStream.h
     client/OutputStream.h
     client/Permission.h
+    client/FileEncryptionInfo.h
+    client/EncryptionZoneIterator.h
+    client/EncryptionZoneInfo.h
     common/Exception.h
     common/XmlConfig.h)
 
