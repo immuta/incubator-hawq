@@ -13,7 +13,7 @@ class Libhdfs3 < Formula
     def install
         cd "depends/libhdfs3/osx" do
             system "chmod +x ./build.sh"
-            system "./build.sh build_googletest"
+            system "./build.sh build_google_test"
             system "./build.sh", "install_package", "#{prefix}"
         end
     end
