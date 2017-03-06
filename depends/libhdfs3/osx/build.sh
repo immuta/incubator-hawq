@@ -8,7 +8,7 @@ die() {
     echo "$@" 1>&2 ; popd 2>/dev/null; exit 1
 }
 
-build_googletest() {
+build_google_test() {
     pushd ${top_dir}/../thirdparty/googletest
     rm -rf build && mkdir -p build && cd build || die "cannot create build directory" 
     cmake ../
