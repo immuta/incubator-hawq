@@ -50,7 +50,7 @@ create_package() {
 	pushd ${top_dir}
     rm -rf build && mkdir -p build && cd build || die "cannot create build directory"
     ../bootstrap || die "bootstrap failed"
-	make rpm-package || die "failed to create debian package"
+	make rpm-package || die "failed to create rpm package"
 	popd
 }
 

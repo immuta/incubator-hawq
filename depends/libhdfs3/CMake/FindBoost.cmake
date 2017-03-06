@@ -421,7 +421,7 @@ endfunction()
 #-------------------------------------------------------------------------------
 
 if(NOT DEFINED Boost_USE_MULTITHREADED)
-    set(Boost_USE_MULTITHREADED TRUE)
+    set(Boost_USE_MULTITHREADED FALSE)
 endif()
 
 # Check the version of Boost against the requested version.

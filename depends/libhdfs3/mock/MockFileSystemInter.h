@@ -106,6 +106,7 @@ public:
   MOCK_METHOD2(listEncryptionZones, bool(const int64_t id, std::vector<Hdfs::EncryptionZoneInfo> &));
   MOCK_METHOD0(listEncryptionZone, Hdfs::EncryptionZoneIterator());
   MOCK_METHOD0(listAllEncryptionZoneItems, std::vector<Hdfs::EncryptionZoneInfo>());
+  MOCK_METHOD1(listXAttrs, std::map<std::string, std::string>(const std::string & src));
 };
 
 #endif /* _HDFS_LIBHDFS3_MOCK_MOCKSOCKET_H_ */
