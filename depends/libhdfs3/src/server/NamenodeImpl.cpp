@@ -877,7 +877,7 @@ std::map<std::string, std::string> NamenodeImpl::listXAttrs(const std::string & 
         invoke(RpcCall(true, "listXAttrs", &request, &response));
         
         std::map<std::string, std::string> retval;
-        for(int i=0; i < response.xattrs_size(); ++i) {
+        for(int i = 0; i < response.xattrs_size(); ++i) {
             XAttrProto xattr = response.xattrs(i);
             std::string xattr_namespace = XAttrProto_XAttrNamespaceProto_Name(
                     xattr.namespace_());
