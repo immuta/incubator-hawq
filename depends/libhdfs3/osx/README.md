@@ -1,6 +1,6 @@
 # Packging LibHdfs3 for Mac OS X
 This directory contains 
-- build script for osx for developign libhdfs3
+- build script for osx for developing libhdfs3
 - homebrew formula to install libhdfs3 on osx
 
 ## Installing libhdfs3
