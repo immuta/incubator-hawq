@@ -133,6 +133,10 @@ public:
         return maxLocalBlockInfoCacheSize;
     }
 
+    bool connectViaHostname() const {
+        return connectToDnViaHostname;
+    }
+
     /*
      * OutputStream configure
      */
@@ -329,6 +333,7 @@ public:
     /*
      * InputStream configure
      */
+    bool connectToDnViaHostname;
     bool useMappedFile;
     bool readFromLocal;
     bool notRetryAnotherNode;
