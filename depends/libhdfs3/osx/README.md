@@ -10,5 +10,5 @@ All you need to do is run
 ./install_homebrew_pkg.sh
 ```
 
-What that will do is setup a local tap for immuta and then "install" our
+What that will do is setup a local tap for libhdfs and then "install" our
 homebrew formula into that tap. It will then run the install.
