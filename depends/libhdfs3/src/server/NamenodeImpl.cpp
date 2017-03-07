@@ -869,7 +869,7 @@ bool NamenodeImpl::listEncryptionZones(const int64_t id, std::vector<EncryptionZ
 
 //Idempotent
 std::map<std::string, std::string> NamenodeImpl::listXAttrs(const std::string & src) {
-                                      /* throw (FileNotFoundException, HdfsIOException) */{
+                                      /* throw (FileNotFoundException, HdfsIOException) */
     try {
         ListXAttrsRequestProto request;
         ListXAttrsResponseProto response;

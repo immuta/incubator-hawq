@@ -35,6 +35,7 @@
 #include "Thread.h"
 #include "XmlConfig.h"
 
+#include <map>
 #include <vector>
 #include <string>
 #include <libxml/uri.h>
@@ -1039,6 +1040,17 @@ static void ConstructHdfsFileInfo(hdfsFileInfo * infos,
     }
 }
 
+static void ConstructHdfsXAttrs(hdfsXAttr * xattrs, std::map<std::string, std::string> & xattrMap) {
+    int i = 0;
+    std::map<std::string, std::string>::iterator it;
+    for(it = xattrMap.begin(); it != xattrMap.end(); ++it, ++i) {
+        //std::string name = it->first;
+        xattrs[i].name = Strdup(it->first.c_str());
+        //std::string value = it->second;
+        xattrs[i].value = Strdup(it->second.c_str());
+    }
+}
+
 hdfsFileInfo * hdfsListDirectory(hdfsFS fs, const char * path,
                                  int * numEntries) {
     PARAMETER_ASSERT(fs && path && strlen(path) > 0 && numEntries, NULL, EINVAL);
@@ -1560,6 +1572,35 @@ hdfsEncryptionZoneInfo * hdfsListEncryptionZones(hdfsFS fs, int * numEntries) {
     }
     return NULL;
 }
+
+void hdfsFreeXAttrs(hdfsXAttr * xattrs, int numEntries) {
+   for(int i =0; xattrs != NULL && i < numEntries; ++i) {
+       delete [] xattrs[i].name;
+       delete [] xattrs[i].value;
+   }
+   delete [] xattrs;
+}
+
+hdfsXAttr * hdfsListXAttrs(hdfsFS fs, char * path, int * numEntries) {
+    PARAMETER_ASSERT(fs && path && strlen(path) > 0, NULL, EINVAL);
+    hdfsXAttr * retval = NULL;
+    int size = 0;
+    std::map<std::string, std::string> attrs = fs->getFilesystem().listXAttrs(path);
+    size = attrs.size();
+    retval = new hdfsXAttr[size];
+    memset(retval, 0, sizeof(hdfsXAttr) * size);
+    ConstructHdfsXAttrs(retval, attrs);
+    *numEntries = size;
+    return retval;
+    try {
+    } catch (...) {
+        SetLastException(Hdfs::current_exception());
+        hdfsFreeXAttrs(retval, size);
+        handleException(Hdfs::current_exception());
+    }
+    return NULL;
+}
+
 #ifdef __cplusplus
 }
 #endif
