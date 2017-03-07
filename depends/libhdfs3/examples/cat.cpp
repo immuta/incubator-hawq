@@ -46,7 +46,7 @@ int main(int argc, char ** argv) {
      *    </property>
      */
     Config * conf = new Config();
-    
+    conf->set("dfs.client.use.datanode.hostname", "true");
     if (file_exists(krb_ticket_path)) {
         // These are needed for kerbros
         conf->set("hadoop.security.authentication", "kerberos");

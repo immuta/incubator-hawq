@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-DIST_DIR="${SCRIPT_DIR}/../dist"
+DIST_DIR=${1:-"${SCRIPT_DIR}/../dist"}
 OS=`uname -s`
 PLATFORM_BUILD_ARGS=""
 
