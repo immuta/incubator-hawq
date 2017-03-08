@@ -761,7 +761,7 @@ void hdfsFreeFileBlockLocations(BlockLocation * locations, int numOfBlock);
  * Create encryption zone for the directory with specific key name
  * @param fs The configured filesystem handle.
  * @param path The path of the directory.
- * @param keyname The key name of the encryption zone 
+ * @param keyname The key name of the encryption zone
  * @return Returns 0 on success, -1 on error.
  */
 int hdfsCreateEncryptionZone(hdfsFS fs, const char * path, const char * keyName);
@@ -798,6 +798,14 @@ typedef struct hdfsXAttr {
  * @return Returns a dynamically-allocated array of hdfsXAttr
  */
 hdfsXAttr * hdfsListXAttrs(hdfsFS fs, char * path, int * numEntires);
+
+/**
+ * hdfsFreeXAttrs - Free up the hdfsFreeXAttrs array (including fields)
+ * @param infos The array of dynamically-allocated hdfsXAttr
+ * objects.
+ * @param numEntries The size of the array.
+ */
+void hdfsFreeXAttrs(hdfsXAttr * xattrs, int numEntries);
 
 
 #ifdef __cplusplus
