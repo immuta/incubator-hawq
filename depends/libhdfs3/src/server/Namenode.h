@@ -39,6 +39,7 @@
 #include "SessionConfig.h"
 
 #include <vector>
+#include <map>
 
 namespace Hdfs {
 namespace Internal {
@@ -843,6 +844,21 @@ public:
     virtual bool listEncryptionZones(const int64_t id, std::vector<EncryptionZoneInfo> & ezl) 
               /* throw (AccessControlException, UnresolvedLinkException, HdfsIOException) */ = 0;
 
+    /**
+     * List all xattributes for a given path
+     *
+     * @param src file name
+     * 
+     * @return a map<string, string> representing the 
+     *         full name (namespace.name) and  value of each xattribute for the
+     *         file. If there is no value for an attribute then the value will
+     *         be an empty string. 
+     *
+     * @throw AccessControlException permission denied
+     * @throw HdfsIOException If an I/O error occurred
+     */
+    virtual std::map<std::string, std::string> listXAttrs(const std::string & src) = 0;
+    /* throw (AccessControlException, HdfsIOException) */
 };
 }
 }

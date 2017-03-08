@@ -63,6 +63,8 @@ SessionConfig::SessionConfig(const Config & conf) {
             &useMappedFile, "input.localread.mappedfile", false
         }, {
             &legacyLocalBlockReader, "dfs.client.use.legacy.blockreader.local", false
+        }, {
+            &connectToDnViaHostname, "dfs.client.use.datanode.hostname", false
         }
     };
     ConfigDefault<int32_t> i32Values[] = {

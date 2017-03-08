@@ -42,6 +42,9 @@ SET(HEADER
     client/InputStream.h
     client/OutputStream.h
     client/Permission.h
+    client/FileEncryptionInfo.h
+    client/EncryptionZoneIterator.h
+    client/EncryptionZoneInfo.h
     common/Exception.h
     common/XmlConfig.h)
 
@@ -60,15 +63,15 @@ TARGET_LINK_LIBRARIES(libhdfs3-shared pthread)
        
 IF(NEED_BOOST)
     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
-    TARGET_LINK_LIBRARIES(libhdfs3-static boost_thread)
+    TARGET_LINK_LIBRARIES(libhdfs3-static boost_thread-mt)
     TARGET_LINK_LIBRARIES(libhdfs3-static boost_chrono)
     TARGET_LINK_LIBRARIES(libhdfs3-static boost_system)
-    TARGET_LINK_LIBRARIES(libhdfs3-static boost_atomic)
+    TARGET_LINK_LIBRARIES(libhdfs3-static boost_atomic-mt)
     TARGET_LINK_LIBRARIES(libhdfs3-static boost_iostreams)
-    TARGET_LINK_LIBRARIES(libhdfs3-shared boost_thread)
+    TARGET_LINK_LIBRARIES(libhdfs3-shared boost_thread-mt)
     TARGET_LINK_LIBRARIES(libhdfs3-shared boost_chrono)
     TARGET_LINK_LIBRARIES(libhdfs3-shared boost_system)
-    TARGET_LINK_LIBRARIES(libhdfs3-shared boost_atomic)
+    TARGET_LINK_LIBRARIES(libhdfs3-shared boost_atomic-mt)
     TARGET_LINK_LIBRARIES(libhdfs3-shared boost_iostreams)
 ENDIF(NEED_BOOST)
 

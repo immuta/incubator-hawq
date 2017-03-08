@@ -786,6 +786,20 @@ hdfsEncryptionZoneInfo * hdfsGetEZForPath(hdfsFS fs, const char * path);
  */
 hdfsEncryptionZoneInfo * hdfsListEncryptionZones(hdfsFS fs, int * numEntries);
 
+typedef struct hdfsXAttr {
+    char * name;
+    char * value;
+} hdfsXAttr;
+
+/**
+ * hdfsListXAttrs - Get list of all the extended attributes for a file.
+ * @param fs The configured filesystem handle.
+ * @param path The path of the file.
+ * @return Returns a dynamically-allocated array of hdfsXAttr
+ */
+hdfsXAttr * hdfsListXAttrs(hdfsFS fs, char * path, int * numEntires);
+
+
 #ifdef __cplusplus
 }
 #endif

@@ -517,6 +517,14 @@ public:
      */
     std::vector<EncryptionZoneInfo> listAllEncryptionZoneItems();
 
+    /**
+     * list all the xattributes for a path
+     * @param src the path we are listing xattributes for
+     * @return a map of string, string representing the names (namespace.name)
+     *         and values of the xattributes.
+     */
+    std::map<std::string, std::string> listXAttrs(const std::string & src);
+
 private:
     Config conf;
     FileSystemKey key;

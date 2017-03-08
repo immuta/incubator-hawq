@@ -32,6 +32,7 @@ option cc_generic_services = true;
 package Hdfs.Internal;
 
 import "hdfs.proto";
+import "xattr.proto";
 import "Security.proto";
 import "encryption.proto";
 
@@ -760,4 +761,6 @@ service ClientNamenodeProtocol {
       returns(ListEncryptionZonesResponseProto);
   rpc getEZForPath(GetEZForPathRequestProto)
       returns(GetEZForPathResponseProto);
+  rpc listXAttrs(ListXAttrsRequestProto)
+      returns(ListXAttrsResponseProto);
 }

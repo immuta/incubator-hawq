@@ -28,6 +28,8 @@
 #include "rpc/RpcClient.h"
 #include "RpcHelper.h"
 
+#include <algorithm>
+
 #define NAMENODE_VERSION 1
 #define NAMENODE_PROTOCOL "org.apache.hadoop.hdfs.protocol.ClientProtocol"
 #define DELEGATION_TOKEN_KIND "HDFS_DELEGATION_TOKEN"
@@ -864,6 +866,35 @@ bool NamenodeImpl::listEncryptionZones(const int64_t id, std::vector<EncryptionZ
         unwrapper.unwrap(__FILE__, __LINE__);
     }
 }
+
+//Idempotent
+std::map<std::string, std::string> NamenodeImpl::listXAttrs(const std::string & src) {
+                                      /* throw (FileNotFoundException, HdfsIOException) */
+    try {
+        ListXAttrsRequestProto request;
+        ListXAttrsResponseProto response;
+        request.set_src(src);
+        invoke(RpcCall(true, "listXAttrs", &request, &response));
+        
+        std::map<std::string, std::string> retval;
+        for(int i = 0; i < response.xattrs_size(); ++i) {
+            XAttrProto xattr = response.xattrs(i);
+            std::string xattr_namespace = XAttrProto_XAttrNamespaceProto_Name(
+                    xattr.namespace_());
+            std::transform(xattr_namespace.begin(), 
+                    xattr_namespace.end(), xattr_namespace.begin(), ::tolower);
+
+            std::string xattr_name = xattr_namespace + "." + xattr.name();
+            std::string xattr_value = xattr.has_value() ? xattr.value() : "";
+            retval[xattr_name] = xattr_value;
+        }
+        return retval;
+    } catch (const HdfsRpcServerException & e) {
+        UnWrapper < FileNotFoundException, HdfsIOException > unwrapper(e);
+        unwrapper.unwrap(__FILE__, __LINE__);
+    }
+}
+
 
 }
 }

@@ -23,7 +23,7 @@
 #define _HDFS_LIBHDFS3_CLIENT_FILESTATUS_H_
 
 #include "Permission.h"
-#include "client/FileEncryptionInfo.h"
+#include "FileEncryptionInfo.h"
 
 #include <string.h>
 
