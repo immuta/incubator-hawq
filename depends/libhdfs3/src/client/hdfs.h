@@ -146,10 +146,9 @@ hdfsFS hdfsConnectNewInstance(const char * nn, tPort port);
  * to hdfsDisconnect, when the hdfsFS is no longer needed.
  *
  * @param bld    The HDFS builder
- * @param effective_user the effective user we are connecting as
  * @return       Returns a handle to the filesystem, or NULL on error.
  */
-hdfsFS hdfsBuilderConnect(struct hdfsBuilder * bld, const char * effective_user=NULL);
+hdfsFS hdfsBuilderConnect(struct hdfsBuilder * bld);
 
 /**
  * Create an HDFS builder.
@@ -203,6 +202,14 @@ void hdfsBuilderSetNameNodePort(struct hdfsBuilder * bld, tPort port);
  * @param userName The user name.  The string will be shallow-copied.
  */
 void hdfsBuilderSetUserName(struct hdfsBuilder * bld, const char * userName);
+
+/**
+ * Set the effective user to use when connecting to the HDFS cluster.
+ *
+ * @param bld The HDFS builder
+ * @param effective_user The effective user.  The string will be shallow-copied.
+ */
+void hdfsBuilderSetEffectiveUser(struct hdfsBuilder * bld, const char * effective_user);
 
 /**
  * Set the path to the Kerberos ticket cache to use when connecting to
