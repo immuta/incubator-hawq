@@ -230,6 +230,7 @@ public:
     shared_ptr<Config> conf;
     std::string nn;
     std::string userName;
+    std::string effectiveUser;
     tPort port;
 };
 
@@ -476,7 +477,12 @@ hdfsFS hdfsBuilderConnect(struct hdfsBuilder * bld) {
     xmlFreeURI(uriobj);
 
     try {
-        fs = new FileSystem(*bld->conf);
+
+        if(bld->effectiveUser.empty()) {
+            bld->effectiveUser = "";
+        }
+
+        fs = new FileSystem(*bld->conf, bld->effectiveUser.c_str());
 
         if (!bld->token.empty()) {
             fs->connect(uri.c_str(), NULL, bld->token.c_str());
@@ -533,6 +539,11 @@ void hdfsBuilderSetNameNodePort(struct hdfsBuilder * bld, tPort port) {
 void hdfsBuilderSetUserName(struct hdfsBuilder * bld, const char * userName) {
     assert(bld && userName && strlen(userName) > 0);
     bld->userName = userName;
+}
+
+void hdfsBuilderSetEffectiveUser(struct hdfsBuilder * bld, const char * effective_user) {
+    assert(bld && effective_user && strlen(effective_user) > 0);
+    bld->effectiveUser = effective_user;
 }
 
 void hdfsBuilderSetKerbTicketCachePath(struct hdfsBuilder * bld,

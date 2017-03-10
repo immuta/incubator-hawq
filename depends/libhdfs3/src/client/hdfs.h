@@ -204,6 +204,14 @@ void hdfsBuilderSetNameNodePort(struct hdfsBuilder * bld, tPort port);
 void hdfsBuilderSetUserName(struct hdfsBuilder * bld, const char * userName);
 
 /**
+ * Set the effective user to use when connecting to the HDFS cluster.
+ *
+ * @param bld The HDFS builder
+ * @param effective_user The effective user.  The string will be shallow-copied.
+ */
+void hdfsBuilderSetEffectiveUser(struct hdfsBuilder * bld, const char * effective_user);
+
+/**
  * Set the path to the Kerberos ticket cache to use when connecting to
  * the HDFS cluster.
  *
