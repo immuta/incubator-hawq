@@ -404,7 +404,7 @@ hdfsFS hdfsConnectNewInstance(const char * host, tPort port) {
     return retVal;
 }
 
-hdfsFS hdfsBuilderConnect(struct hdfsBuilder * bld) {
+hdfsFS hdfsBuilderConnect(struct hdfsBuilder * bld, const char * effective_user) {
     PARAMETER_ASSERT(bld && !bld->nn.empty(), NULL, EINVAL);
     Hdfs::Internal::SessionConfig conf(*bld->conf);
     std::string uri;
@@ -476,7 +476,7 @@ hdfsFS hdfsBuilderConnect(struct hdfsBuilder * bld) {
     xmlFreeURI(uriobj);
 
     try {
-        fs = new FileSystem(*bld->conf);
+        fs = new FileSystem(*bld->conf, effective_user);
 
         if (!bld->token.empty()) {
             fs->connect(uri.c_str(), NULL, bld->token.c_str());

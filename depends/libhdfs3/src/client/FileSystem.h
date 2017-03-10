@@ -48,6 +48,13 @@ public:
     FileSystem(const Config & conf);
 
     /**
+     * Construct a FileSystem with the effective user
+     * @param conf hdfs configuration
+     * @param effective_user the user that the commands will be proxied as
+     */
+    FileSystem(const Config & conf, const char * effective_user);
+
+    /**
      * Copy construct of FileSystem
      */
     FileSystem(const FileSystem & other);
@@ -318,6 +325,7 @@ public:
 private:
     Config conf;
     Internal::FileSystemWrapper * impl;
+    std::string effective_user;
 
     friend class InputStream;
     friend class OutputStream;

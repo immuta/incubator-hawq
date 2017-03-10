@@ -146,9 +146,10 @@ hdfsFS hdfsConnectNewInstance(const char * nn, tPort port);
  * to hdfsDisconnect, when the hdfsFS is no longer needed.
  *
  * @param bld    The HDFS builder
+ * @param effective_user the effective user we are connecting as
  * @return       Returns a handle to the filesystem, or NULL on error.
  */
-hdfsFS hdfsBuilderConnect(struct hdfsBuilder * bld);
+hdfsFS hdfsBuilderConnect(struct hdfsBuilder * bld, const char * effective_user=NULL);
 
 /**
  * Create an HDFS builder.
