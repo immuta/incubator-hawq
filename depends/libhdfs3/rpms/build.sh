@@ -23,6 +23,15 @@ die() {
     echo "$@" 1>&2 ; popd 2>/dev/null; exit 1
 }
 
+build_google_test() {
+    pushd ${top_dir}/../thirdparty/googletest
+    rm -rf build && mkdir -p build && cd build || die "cannot create build directory"
+    cmake ../
+    make
+    make install
+    popd
+}
+
 install_depends() {
     yum install -y epel-release || die "cannot install epel"
     yum install -y \
@@ -62,22 +71,22 @@ deploy() {
     if [ -z "${version}" ]; then
         die "cannot get version"
     fi
-    
+
     if [ -z "${BINTRAY_KEY}" ]; then
         die "bintray api key not set"
     fi
-    
+
     message=`curl -H "X-Bintray-Publish: 1" -H "X-Bintray-Override: 1" -T ${top_dir}/rpms/RPMS/x86_64/libhdfs3-${version}-1.el7.centos.x86_64.rpm -uwangzw:${BINTRAY_KEY} \
       https://api.bintray.com/content/wangzw/rpm/libhdfs3/${version}/centos7/x86_64/libhdfs3-${version}-1.el7.centos.x86_64.rpm`
-    
+
     if [ -z `echo ${message} | grep "success"` ]; then
         echo ${message}
         die "failed to upload libhdfs3-${version}-1.el7.centos.x86_64.rpm"
     fi
-    
+
     message=`curl -H "X-Bintray-Publish: 1" -H "X-Bintray-Override: 1" -T ${top_dir}/rpms/RPMS/x86_64/libhdfs3-devel-${version}-1.el7.centos.x86_64.rpm -uwangzw:${BINTRAY_KEY} \
       https://api.bintray.com/content/wangzw/rpm/libhdfs3/${version}/centos7/x86_64/libhdfs3-devel-${version}-1.el7.centos.x86_64.rpm`
-    
+
     if [ -z `echo ${message} | grep "success"` ]; then
         echo ${message}
         die "failed to upload libhdfs3-devel-${version}-1.el7.centos.x86_64.rpm"
@@ -91,7 +100,7 @@ run() {
     build_with_boost || die "build failed with boost"
     build_with_debug || die "build failed with debug mode"
     create_package || die "failed to create debian package"
-    
+
     version=$(cat ${top_dir}/rpms/BUILD/version)
     echo "version ${version}"
 
