@@ -40,8 +40,8 @@
 #include <string>
 #include <libxml/uri.h>
 
-//TODO: DELETE ME
-#include <iostream>
+// TODO DELETE ME
+#include <fstream>
 
 #ifdef __cplusplus
 extern "C" {
@@ -491,6 +491,11 @@ hdfsFS hdfsBuilderConnect(struct hdfsBuilder * bld) {
 
         fs = new FileSystem(*bld->conf, bld->effectiveUser.c_str());
 
+        std::ofstream ofs;
+        ofs.open("/tmp/libhdfs3.txt", std::ofstream::out | std::ofstream::app);
+        ofs << "Username is " << user << std::endl;
+        ofs << "Effective User is " << bld->effectiveUser << std::endl;
+        ofs.close();
         if (!bld->token.empty()) {
             fs->connect(uri.c_str(), NULL, bld->token.c_str());
         } else if(!user.empty()) {
