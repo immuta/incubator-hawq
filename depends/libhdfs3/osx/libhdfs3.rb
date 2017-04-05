@@ -1,6 +1,6 @@
 class Libhdfs3 < Formula
     url "git@github.com:immuta/incubator-hawq.git", :using => :git 
-    version "2.2.31"
+    version "2.2.32"
 
     depends_on "boost"
     depends_on "protobuf"
