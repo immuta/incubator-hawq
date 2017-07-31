@@ -45,20 +45,6 @@ It gets rid of the drawbacks of JNI, and it has a lightweight,
 small memory footprint code base. In addition, it is easy to use and deploy.
 .
 
-%package devel
-Summary: Native C/C++ HDFS Client - development files
-Requires: %{name} = %{version}-%{release}
-Group: Development/Libraries
-Requires: libhdfs3 = %{version}-%{release}
-Requires: libuuid-devel libxml2-devel krb5-devel libgsasl-devel protobuf-devel pkgconfig
-
-%description devel
-Libhdfs3, designed as an alternative implementation of libhdfs,
-is implemented based on native Hadoop RPC protocol and
-HDFS data transfer protocol.
-It gets rid of the drawbacks of JNI, and it has a lightweight,
-small memory footprint code base. In addition, it is easy to use and deploy.
-
 %build
 %{_sourcedir}/../../bootstrap --prefix=${RPM_BUILD_ROOT}/usr
 %{__make}
@@ -73,9 +59,6 @@ small memory footprint code base. In addition, it is easy to use and deploy.
 %files
 %defattr(-,root,root,-)
 %{_prefix}/lib/lib*.so.*
-
-%files devel
-%defattr(-,root,root,-)
 %{_prefix}/lib/lib*.so
 %{_prefix}/lib/*.a
 %{_prefix}/lib/pkgconfig/*
