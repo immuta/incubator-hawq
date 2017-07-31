@@ -5,4 +5,5 @@ RUN yum -y localinstall https://forensics.cert.org/cert-forensics-tools-release-
 RUN wget http://repo.enetres.net/enetres.repo -O /etc/yum.repos.d/enetres.repo
 RUN yum -y install devtoolset-3-toolchain
 RUN yum -y install protobuf-devel boost-devel
-ENTRYPOINT ["scl", "enable", "devtoolset-3", "bash"]
+COPY entrypoint.sh /usr/local/bin
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
