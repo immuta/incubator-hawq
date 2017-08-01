@@ -73,6 +73,8 @@ small memory footprint code base. In addition, it is easy to use and deploy.
 %files
 %defattr(-,root,root,-)
 %{_prefix}/lib/lib*.so.*
+%{_prefix}/lib/lib*.so
+%{_prefix}/lib/*.a
 
 %files devel
 %defattr(-,root,root,-)
