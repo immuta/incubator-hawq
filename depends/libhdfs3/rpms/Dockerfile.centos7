@@ -1,0 +1,6 @@
+FROM centos:7
+
+RUN yum -y install wget epel-release
+RUN yum -y install protobuf-devel boost-devel
+COPY entrypoint.sh /usr/local/bin
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
