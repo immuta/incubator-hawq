@@ -95,12 +95,22 @@ deploy() {
     popd
 }
 
+clean() {
+    pushd ${top_dir}/../thirdparty/googletest
+    make clean
+    popd
+    pushd ${top_dir}
+    make clean
+    popd
+}
+
 run() {
     install_depends || die "failed to install dependencies"
     build_google_test || die "unable to build google test"
     build_with_boost || die "build failed with boost"
     build_with_debug || die "build failed with debug mode"
     create_package || die "failed to create debian package"
+    clean
 
     version=$(cat ${top_dir}/rpms/BUILD/version)
     echo "version ${version}"
