@@ -98,9 +98,11 @@ deploy() {
 clean() {
     pushd ${top_dir}/../thirdparty/googletest
     make clean
+    rm -rf build
     popd
     pushd ${top_dir}
     make clean
+    rm -rf build
     popd
 }
 
