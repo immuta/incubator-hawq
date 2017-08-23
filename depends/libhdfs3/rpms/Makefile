@@ -14,6 +14,10 @@ el7:
 	mv RPMS el7
 	rm -rf BUILD* SRPMS* SPECS* SOURCES*
 
-.PHONY:
+.PHONY: clean
 clean: 
 	rm -rf el7 el6 
+
+.PHONY: clean-bad-run
+clean-bad-run:
+	 rm -rf BUILD* SRPMS* SPECS* SOURCES* RPMS*
