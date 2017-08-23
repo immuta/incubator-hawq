@@ -1,9 +1,12 @@
 FROM centos:6.6
 
 RUN yum -y install wget centos-release-scl-rh epel-release
+
+# For Protobuf 2.4+
 RUN yum -y localinstall https://forensics.cert.org/cert-forensics-tools-release-el6.rpm
+
 RUN wget http://repo.enetres.net/enetres.repo -O /etc/yum.repos.d/enetres.repo
 RUN yum -y install devtoolset-3-toolchain
 RUN yum -y install protobuf-devel boost-devel
 COPY entrypoint.sh /usr/local/bin
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD "/usr/local/bin/entrypoint.sh"

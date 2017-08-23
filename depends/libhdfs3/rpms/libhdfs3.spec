@@ -37,6 +37,12 @@ BuildRequires: krb5-devel
 BuildRequires: libgsasl-devel
 BuildRequires: protobuf-devel
 
+Requires: protobuf >= 2.4.0
+Requires: libxml2
+Requires: krb5-workstation
+Requires: libgsasl
+Requires: libuuid
+
 %description
 Libhdfs3, designed as an alternative implementation of libhdfs,
 is implemented based on native Hadoop RPC protocol and
