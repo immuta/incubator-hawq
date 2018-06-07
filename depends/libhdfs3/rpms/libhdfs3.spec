@@ -36,6 +36,11 @@ BuildRequires: libxml2-devel
 BuildRequires: krb5-devel
 BuildRequires: libgsasl-devel
 BuildRequires: protobuf-devel
+Requires: libuuid
+Requires: libxml2
+Requires: krb5-workstation
+Requires: libgsasl
+Requires: protobuf >= 2.4.0
 
 Requires: protobuf >= 2.4.0
 Requires: libxml2
