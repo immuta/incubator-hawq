@@ -6,7 +6,7 @@ class Libhdfs3 < Formula
     depends_on "protobuf"
     depends_on "ossp-uuid"
     depends_on "libxml2" 
-    depends_on "homebrew/dupes/krb5"
+    depends_on "krb5"
     depends_on "gsasl"
     depends_on "cmake"
 

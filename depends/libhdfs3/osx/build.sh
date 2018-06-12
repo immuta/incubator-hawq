@@ -18,7 +18,7 @@ build_google_test() {
 }
 
 install_depends() {
-    for package in boost protobuf ossp-uuid libxml2 homebrew/dupes/krb5 gsasl cmake
+    for package in boost protobuf ossp-uuid libxml2 krb5 gsasl cmake
     do
         brew install $package
     done
