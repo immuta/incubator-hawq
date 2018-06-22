@@ -3,18 +3,19 @@ FROM centos:6.9
 RUN yum -y install \
         centos-release-scl-rh \
         epel-release \
-        devtoolset-3-toolchain \
         wget \
         git \
         make \
-        g++ \
         bzip2-devel \
         zlib-devel \
         # For Protobuf 2.4+
         https://forensics.cert.org/cert-forensics-tools-release-el6.rpm \
     && \
     yum -y groupinstall 'Development Tools' && \
-    yum -y install protobuf-devel && \
+    yum -y install \
+        protobuf-devel \
+        devtoolset-3-toolchain \
+    && \
     wget http://sourceforge.net/projects/boost/files/boost/1.53.0/boost_1_53_0.tar.gz && \
     tar -xzf boost_1_53_0.tar.gz && \
     cd boost_1_53_0 && \
