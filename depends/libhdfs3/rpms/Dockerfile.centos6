@@ -1,12 +1,26 @@
-FROM centos:6.6
+FROM centos:6.9
 
-RUN yum -y install wget centos-release-scl-rh epel-release
+RUN yum -y install \
+        centos-release-scl-rh \
+        epel-release \
+        wget \
+        git \
+        make \
+        bzip2-devel \
+        zlib-devel \
+        # For Protobuf 2.4+
+        https://forensics.cert.org/cert-forensics-tools-release-el6.rpm \
+    && \
+    yum -y groupinstall 'Development Tools' && \
+    yum -y install \
+        protobuf-devel \
+        devtoolset-3-toolchain \
+    && \
+    wget http://sourceforge.net/projects/boost/files/boost/1.53.0/boost_1_53_0.tar.gz && \
+    tar -xzf boost_1_53_0.tar.gz && \
+    cd boost_1_53_0 && \
+    ./bootstrap.sh --prefix=/usr --with-libraries=program_options,chrono,atomic,thread,system,iostreams && \
+    ./b2 install link=shared runtime-link=shared threading=multi,single --layout=tagged
 
-# For Protobuf 2.4+
-RUN yum -y localinstall https://forensics.cert.org/cert-forensics-tools-release-el6.rpm
-
-RUN wget http://repo.enetres.net/enetres.repo -O /etc/yum.repos.d/enetres.repo
-RUN yum -y install devtoolset-3-toolchain
-RUN yum -y install protobuf-devel boost-devel
 COPY entrypoint.sh /usr/local/bin
 CMD "/usr/local/bin/entrypoint.sh"
