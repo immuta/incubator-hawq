@@ -12,7 +12,7 @@ RUN yum -y install \
         https://forensics.cert.org/cert-forensics-tools-release-el6.rpm \
     && \
     yum -y groupinstall 'Development Tools' && \
-    yum -y install \
+    yum -y --enablerepo=centos-sclo-rh-testing install \
         protobuf-devel \
         devtoolset-3-toolchain \
     && \
