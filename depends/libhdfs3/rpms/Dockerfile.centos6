@@ -14,7 +14,7 @@ RUN yum -y install \
     yum -y groupinstall 'Development Tools' && \
     yum -y install \
         protobuf-devel \
-        devtoolset-6-toolchain \
+        devtoolset-7-toolchain \
     && \
     wget http://sourceforge.net/projects/boost/files/boost/1.53.0/boost_1_53_0.tar.gz && \
     tar -xzf boost_1_53_0.tar.gz && \
