@@ -12,9 +12,9 @@ RUN yum -y install \
         https://forensics.cert.org/cert-forensics-tools-release-el6.rpm \
     && \
     yum -y groupinstall 'Development Tools' && \
-    yum -y --enablerepo=centos-sclo-rh-testing install \
+    yum -y install \
         protobuf-devel \
-        devtoolset-3-toolchain \
+        devtoolset-6-toolchain \
     && \
     wget http://sourceforge.net/projects/boost/files/boost/1.53.0/boost_1_53_0.tar.gz && \
     tar -xzf boost_1_53_0.tar.gz && \
